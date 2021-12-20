@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: "Roboto", sans-serif;
 }
 
 .App-logo {
@@ -26,6 +27,19 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.modal.show .modal-dialog {
+  -webkit-transform: none;
+  transform: none;
+  width: 700px !important;
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 700px;
+    margin: 1.75rem auto;
+  }
 }
 
 @keyframes App-logo-spin {

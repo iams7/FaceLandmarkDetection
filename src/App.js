@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect, useRef } from "react";
+import * as faceapi from "face-api.js";
+import "./App.css";
+import { Button } from "react-bootstrap";
+import LandMarkDetectorModal from "./modals/LandMarkDetectorModal";
+import FaceLandmarkDetector from "./components/FaceLandmarkDetector";
 
 function App() {
+  const [initialized, setInitialized] = useState(false);
+
+  const [title, setTitle] = useState("");
+  const [modalShow, setModalShow] = useState(false);
+
+  const showFaceDetectorModal = () => {
+    setTitle("Face Landmark Detector");
+    setTimeout(() => {
+      setModalShow(true);
+    }, 200);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <React.Fragment>
+      <div className="App mt-5">
+        <FaceLandmarkDetector showCanvas={false} />
+        <br />
+        <Button
+          className="mt-5"
+          disabled={initialized ? true : false}
+          onClick={() => showFaceDetectorModal()}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          Detect Face Landmark
+        </Button>
+      </div>
+      <LandMarkDetectorModal
+        title={title}
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
+    </React.Fragment>
   );
 }
 
